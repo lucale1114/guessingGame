@@ -34,6 +34,11 @@ public class Guesser{
    * in the method body, you call first the
    * rules() method, next the doGuesses() method.
    */
+
+   public static void main(String[] args) {
+   Guesser guesser = new Guesser(0, 1000);
+   }
+
   public void start(){
 
     rules();
