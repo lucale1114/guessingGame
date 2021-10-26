@@ -8,8 +8,8 @@ import java.io.Console;
  * task to complete the missing parts.
  */
 public class Guesser{
-  private int low;
-  private int high;
+  private static int low;
+  private static int high;
 
   /*
    * Task 1. Write code here for a constructor
@@ -37,15 +37,16 @@ public class Guesser{
 
    public static void main(String[] args) {
    Guesser guesser = new Guesser(0, 1000);
+   start();
    }
 
-  public void start(){
+  public static void start(){
 
     rules();
     doGuesses();
   }
 
-  private void rules(){
+  private static void rules(){
     System.out.println("Think of a number between " +
                        low + " and "  + high);
     System.out.println("I'm going to ask a few questions in order " +
@@ -63,8 +64,17 @@ public class Guesser{
    * a valid reply. Return the String that you read from
    * the player.
    */
-  private String getReply(){
-    String reply = null;
+  private static String getReply(){
+    String reply = System.console().readLine();
+    
+    while (true)
+    if (reply.equalsIgnoreCase("t") || reply.equalsIgnoreCase("f")){
+    break;
+    }
+    else{
+      System.out.println("Invalid answer. Please input t or f.");
+      reply = System.console().readLine();
+    }
     // Write code here which reads a String from the console.
     // As long as it is not a valid reply (one of "T" and "F")
     // write an error message, and read a new reply.
@@ -72,7 +82,7 @@ public class Guesser{
     return reply;
   }
 
-  private void doGuesses(){
+  private static void doGuesses(){
     int i=0; // number of guesses
     int middle=0;
     while(low<high){
@@ -83,7 +93,7 @@ public class Guesser{
       System.out.println("Is the number less than or equal to " +
                          middle + "?");
       String reply = getReply();
-      if("T".equals(reply)){
+      if("T".equalsIgnoreCase(reply)){
         // The number is less than or equal to middle
         // so we move down high to middle
         high = middle;
@@ -99,7 +109,7 @@ public class Guesser{
     answer(low, i);
   }
 
-  private void answer(int guess, int numberOfGuesses){
+  private static void answer(int guess, int numberOfGuesses){
     System.out.println("You were thinking about " +
                        guess +
                        " (took me " + numberOfGuesses +
