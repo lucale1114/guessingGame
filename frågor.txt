@@ -1,0 +1,76 @@
+----------------------------------------------
+-- Går bra med VG. Satsar ej på IG dock. :) --
+----------------------------------------------
+
+* När använder man add respektive commit?
+
+- Add används när man vill lägga till något till staging area. Det man vill använda commit på lägger man till där.
+Commit är som att man gör en snapshot. Den sparar dina ändringar på programmet, där man kan också gå tillbaka till det versionen.
+Allt man använder commit på sparas i en log där man kan se alla ändringar som sker och vem som gjort de.
+
+Det är alltid viktigt att använda -m argumenten när man använder commit eftersom det är med det man kan lämna ett meddelande efter man gjort ändringar.
+
+* Vad är pull repektive push?
+
+- "git pull" är ett kommando som är en kombination av "git fetch" och "git merge". Den hämtar en remote repository och sedan mergar den
+med den lokala branchen/repository som man använder. Det kan uppstå konflikter som man måste lösa om man använder detta kommandot.
+
+"git push" är motsatsen till detta. Istället för att hämta från remote repository, så lägger man till det/skriver över remote repository
+med det arbetet man har lokalt. Det kan ses som en commit för remote, vilket gör att det är bra att använda efter man gjort en commit
+lokalt.
+
+* När använder man log respektive status?
+
+- "git status" används för att statusen på filer som man inte har commitat än.
+Man ser var filerna är, om de lagts till i staging area eller om de är kvar i working directory.
+Den berättar vilka filer som lagts till, modifierades, eller tagits bort. 
+Så fort man använder commit returnerar detta kommandot inget speciellt.
+
+"git log" använder man när man vill se på historiken av commits. Den visar alla commits som gjorts på projektet än så länge.
+Den visar datumet när commit gjordes, samt vem det var som gjorde det.
+Man använder log när man behöver en ID som en commit, vilket används i några viktiga kommandon.
+
+* Hur kan man formulera sig i sina commit-meddelanden?
+
+- Det är bra att ge en kortfattat beskrivning av vad det var som man hade ändrat. Det ska inte vara lång, eftersom det är bra att ändå göra
+commits ganska så ofta (vilket betyder att man inte får mycket arbete gjort mellan varje commit).
+
+T.ex om man lagt till en fil kan man skriva "Added 'file.txt' and 'file2.txt'" 
+eller om man modifierade en fil "Replaced 'hi' with 'hello' in file.txt".
+Man behöver inte skriva sitt namn eller datum när man gjort det eftersom det automatiskt står på log. Det står också om man lagt till, 
+modifierade, eller tagit bort en fil, men det är bra att tydliggöra det man gjort.
+
+-.-.-
+
+* Det finns flera sätt att rulla tillbaka koden till ett tidigare tillstånd. 
+Förklara skillnaden och motivera när man skulle använda den ena eller andra metoden. 
+Ge exempel på de kommandon du använder för att göra detta och vissa att det fungerar, vilken output du fick från git-kommandona.
+
+- "git revert" eller "git reset". Båda av dessa kommandon kan man använda för att ångra sina ändringar efter man använt commit.
+Revert kan man använda för att ångra ändringar som en commit gjorde. Om en commit byter texten "hello" till "hej" så kan revert byta
+den tillbaka till "hello". Detta kan man göra genom att ange den id som commiten har.
+
+Reset används för att ångra en commit eller flytta ner filer till staging eller working directory. Den gör det genom att flytta på HEAD.
+Det finns ganska mycket man kan bestämma med detta kommandon. Man kan välja vad som händer med filer, genom soft/mixed/hard. 
+
+Om man ångrar en ändring som man gjort för några commits sen så är revert lämplig att ändra på det som är dåligt. Om man har nyligen tillagt en fil kan man använda reset på den för att 
+flytta tillbaka den där man vill.
+
+När man använder revert ser det ut så här. Det säger lite om vad som hände, men den är inte så specifik. Det jag gjorde här är att jag tog bort ny kod som jag la till Game.java.
+Jag fick anvädnda 'git revert fd6a205', de sista siffrorna är id på commit.
+-
+[master 25c914d] Revert "Added code to Game.java"
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+
+Användandet av reset kan se ut så här. Det som användes här var "git reset --hard HEAD". Hard gör att ändringarna flyttas ut från commit, och tas bort.
+HEAD att man ska göra sitt reset där pekaren står, vilket är på den sista ändringen man gjort om man inte pilar med det.
+-
+HEAD is now at 04f862c Added example file
+-
+
+
+
+
+
+
